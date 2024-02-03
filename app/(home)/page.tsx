@@ -3,6 +3,8 @@ import Image from "next/image";
 import Header from "../_components/header";
 import { currentLocale } from '../_utils/constants';
 import Search from './_components/Search'
+import BookingItem from '../_components/booking-item';
+import TitleCompoment from '../_components/titleComponent';
 
 
 export default function Home() {
@@ -15,6 +17,10 @@ export default function Home() {
       </div>
 
       <div className='px-5 mt-6'><Search /></div>
+      <div className="px-5 mt-6">
+        <TitleCompoment title="Agendamentos"></TitleCompoment>
+        <BookingItem></BookingItem>
+      </div>
 
       
       
