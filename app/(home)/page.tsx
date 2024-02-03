@@ -5,9 +5,13 @@ import { currentLocale } from '../_utils/constants';
 import Search from './_components/Search'
 import BookingItem from '../_components/booking-item';
 import TitleCompoment from '../_components/titleComponent';
+import { db } from '../_lib/prima';
+import BarberShopItem from './_components/barbershop-item';
 
 
-export default function Home() {
+export default async function Home() {
+const barbershops = await db.barbershop.findMany({})
+
   return (
     <div>
       <Header />
@@ -18,12 +22,19 @@ export default function Home() {
 
       <div className='px-5 mt-6'><Search /></div>
       <div className="px-5 mt-6">
-        <TitleCompoment title="Agendamentos"></TitleCompoment>
+        <TitleCompoment title="Agendamentos" px={0}></TitleCompoment>
         <BookingItem></BookingItem>
       </div>
-
-      
-      
+      <div className='mt-6'>
+        <TitleCompoment title="Recomendados" px={5}></TitleCompoment>
+        <div className="flex px-5 gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+            {barbershops.map((barbershop) => (
+              <BarberShopItem key={barbershop.id} barbershop={barbershop}></BarberShopItem>
+            ))
+            }
+        </div>
+      </div>
+     
     </div>
   );
 }
